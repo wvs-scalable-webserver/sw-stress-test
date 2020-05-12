@@ -29,13 +29,13 @@ public class StressCommand extends Command {
     public boolean execute(String[] args) {
 
         if (args.length < 3) {
-            logger.info("Syntax: stress <host> <threads> <time>");
+            logger.info("Syntax: stress <host> <threads> <ms>");
             return false;
         }
 
         String hostname = args[0];
         int threads = Integer.parseInt(args[1]);
-        int time = Integer.parseInt(args[1]);
+        int time = Integer.parseInt(args[2]);
 
         logger.info("Starting stress on " + hostname + " for " + time + "s..");
 
@@ -44,11 +44,10 @@ public class StressCommand extends Command {
                 try {
                     HermesClient client = HermesClientFactory.create();
                     Response response = client.get(new URL(hostname), Headers.empty());
-                    logger.info("Response: " + response.status());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }, 0, time, TimeUnit.SECONDS);
+            }, 0, time, TimeUnit.MILLISECONDS);
         }
 
         return true;

@@ -39,9 +39,6 @@ public class StressTest {
     private ScheduledExecutorService scheduledExecutorService;
 
     @Getter
-    private SWSlave slave;
-
-    @Getter
     private CommandManager commandManager;
 
     private Scanner scanner;
@@ -56,8 +53,6 @@ public class StressTest {
     public void start() {
 
         this.scheduledExecutorService = Executors.newScheduledThreadPool(10);
-
-        this.slave = new SWSlave();
 
         this.commandManager = new CommandManager();
         commandManager.addCommand(new HelpCommand("help", "List of available commands", "h"));
